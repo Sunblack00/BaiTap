@@ -1,52 +1,52 @@
-import React from "react";
-class Childcomponent extends React.Component {
+import React, { Component } from "react";
+
+export default class ChildComponent extends Component {
   constructor(props) {
     super(props);
+    // this.state = {
+    //   valueInput: "",
+    // };
     this.state = {
-      Name: "Eric",
-      Age: 28,
+      Name: "Pham Dac Thinh",
+      Age: 21,
+      Address: "HCM",
     };
   }
-  handleInput = (event) => {
+  handleInput = (e) => {
     this.setState({
-      valueInput: event.target.value,
+      valueInput: e.target.value,
     });
   };
-
-  handleOnchangeInput = (event) => {
+  handleOnChangeInput = (e) => {
     this.setState({
-      Name: event.target.value,
+      Name: e.target.value,
     });
   };
 
-  handleOnSubmit = (event) => {
-    event.preventDefault(); //ngăn việc tải lại trang
-    //console.log(this.state)
-    this.props.handleAddnewUser({
-      id: Math.floor(Math.random() * 100 + 1) + "user",
-      Name: this.state.Name,
-      Age: this.state.Age,
-    });
+  handleOnSubmit = (e) => {
+    e.preventDefault();
+    console.log(this.state);
   };
-
   render() {
     return (
-      <>
-        <form action="" onSubmit={(event) => this.handleOnSubmit(event)}>
-          <div>
-            My name is: {this.state.Name}
-            <br />
-            Address: {this.state.Address}
-          </div>
-          <input
-            type="text"
-            value={this.state.Name} //gán giá trị mặc định
-            onChange={(event) => this.handleOnchangeInput(event)}
-          />
-          <button>Submit</button>
-        </form>
-      </>
+      <div>
+        My name is: {this.state.Name}
+        <br />
+        My age is: {this.state.Age}
+        <div>
+          <form
+            onSubmit={(e) => {
+              this.handleOnSubmit(e);
+            }}
+          >
+            <input type="text" onChange={(e) => this.handleOnChangeInput(e)} />
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+        {/* <div>
+          <span> {this.state.valueInput} </span>
+        </div> */}
+      </div>
     );
   }
 }
-export default Childcomponent;
